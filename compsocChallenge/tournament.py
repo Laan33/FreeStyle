@@ -42,24 +42,26 @@ def play_tournament():
         winners = []
         losers = []
 
-        # If there is an odd number of algorithms, select a losing algorithm to play against the last algorithm
-        if len(algorithms) % 2 == 1:
-            last_algorithm = algorithms[-1]
-            algorithms = algorithms[:-1]
-            algorithm_1 = last_algorithm.RockPaperScissors()
-            algorithm_2 = algorithms[-1].RockPaperScissors()
-            score = play_round(algorithm_1, algorithm_2)
-            if score > 0:
-                winners.append(last_algorithm)
-                losers.append(algorithms[-1])
-            else:
-                winners.append(algorithms[-1])
-                losers.append(last_algorithm)
-            algorithms = algorithms[:-1]
-
         for i in range(0, len(algorithms), 2):
+            # If there is an odd number of algorithms, select a losing algorithm to play against the last algorithm
+            if (len(algorithms) - i) == 1:
+                print("hi2")
+                last_algorithm = algorithms[-1]
+                algorithms = algorithms[:-1]
+                algorithm_1 = last_algorithm.RockPaperScissors()
+                algorithm_2 = algorithms[-1].RockPaperScissors()
+                score = play_round(algorithm_1, algorithm_2)
+                if score > 0:
+                    winners.append(last_algorithm)
+                    losers.append(algorithms[-1])
+                else:
+                    winners.append(algorithms[-1])
+                    losers.append(last_algorithm)
+                break
+
             algorithm_1 = algorithms[i].RockPaperScissors()
             algorithm_2 = algorithms[i + 1].RockPaperScissors()
+            print(f"Playing {algorithm_1.team_name} vs {algorithm_2.team_name}")
             score = play_round(algorithm_1, algorithm_2)
             if score > 0:
                 winners.append(algorithms[i])
@@ -67,6 +69,7 @@ def play_tournament():
             else:
                 winners.append(algorithms[i + 1])
                 losers.append(algorithms[i])
+
         algorithms = winners
         print(f"Stage {stage} winners: {[algorithm.__name__ for algorithm in algorithms]}")
         stage += 1
@@ -110,7 +113,7 @@ def play_round(algorithm_1, algorithm_2):
         score += base_game_rules(move_1, move_2)
         print(f"Score: {score}")
 
-        if tiebreaker_count > 0:
+        if tiebreaker_count > 25:
             print("Tiebreaker limit reached")
             break
 

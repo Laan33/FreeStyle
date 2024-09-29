@@ -6,7 +6,7 @@ import random
 class RockPaperScissors:
     def __init__(self):
         self.last_move = None
-        self.team_name = "<team name>"
+        self.team_name = "Cathal"
 
     def play(self, yourMovesArray, opponentsMovesArray):
         """
@@ -22,7 +22,7 @@ class RockPaperScissors:
         """
 
 
-        move = random.choice(['rock', 'paper', 'scissors'])
+        move = 'scissors'
         return move
 
 

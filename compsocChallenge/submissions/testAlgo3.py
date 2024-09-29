@@ -1,11 +1,12 @@
 # You must rename this file to 'team<team_number>.py' before submitting.
 
 # Members: <team members>
+import random
 
 class RockPaperScissors:
     def __init__(self):
         self.last_move = None
-        self.team_name = "Andrew"
+        self.team_name = "Caela"
 
     def play(self, yourMovesArray, opponentsMovesArray):
         """
@@ -21,9 +22,7 @@ class RockPaperScissors:
         """
 
 
-
-        # Example move
-        move = 'scissors'
+        move = random.choice(['rock'])
         return move
 
 
