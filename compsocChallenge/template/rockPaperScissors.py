@@ -2,20 +2,34 @@
 
 # Members: <team members>
 
+import csv
+
 class RockPaperScissors:
     def __init__(self):
         self.last_move = None
         self.team_name = "<team name>"
 
-    def play(self, last_opponent_move):
+    def play(self, yourMovesArray, opponentsMovesArray):
         """
         Implement your algorithm here.
-        This function should return 'rock', 'paper', or 'scissors'.
-        The opponents last move for the previous game is an input to this function.
+        This function should return 'rock', 'paper', or 'scissors'. No uppercase letters.
+        There are two arrays that you can use to read the previous moves and results.
+
+        Example arrays with previous moves
+        Your moves: ['rock', 'paper', 'scissors']
+        Opponent's moves: ['scissors', 'rock', 'paper']
+
+        Best of luck!
         """
-        move = 'rock'  # Example move
-        self.last_move = move
-        return move  # Example return value
+
+
+
+        # Example move
+        move = 'rock'
+        return move
+
+
+
 
 # Example usage
 # rps = RockPaperScissors()
