@@ -1,18 +1,12 @@
-"""
-Only this file needs to be submitted. The other files are for reference only.
-BEFORE submitting, you must rename this file to 'team<team_number>.py'.
-
-i.e. if you're team num 1, rename this file to 'team1.py'.
-"""
-
-
+# You must rename this file to 'team<team_number>.py' before submitting.
 
 # Members: <team members>
+import random
 
 class RockPaperScissors:
     def __init__(self):
         self.last_move = None
-        self.team_name = "<team name>" # You can give this a name of your choice
+        self.team_name = "<team name>"
 
     def play(self, yourMovesArray, opponentsMovesArray):
         """
@@ -28,9 +22,7 @@ class RockPaperScissors:
         """
 
 
-
-        # Example move
-        move = 'rock'
+        move = random.choice(['rock', 'paper', 'scissors'])
         return move
 
 

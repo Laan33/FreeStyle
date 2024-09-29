@@ -24,7 +24,7 @@ def load_algorithms():
     """
     algorithms = []
     for file in os.listdir("submissions"):
-        if file.endswith(".py"):
+        if file.endswith(".py") and file.startswith("team"):
             team_name = file.split(".")[0]
             module = importlib.import_module(f"submissions.{team_name}")
             algorithms.append(module)
