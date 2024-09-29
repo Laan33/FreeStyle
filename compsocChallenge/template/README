@@ -1,2 +1,12 @@
 This is the template for the challenge, do not change the implementation of how the game is played, only the algorithm.
 
+# Rock Paper Scissors Challenge
+
+This is the template for the challenge. Do not change the implementation of how the game is played, only the algorithm.
+
+## Instructions
+1. Implement your algorithm in the `play` function in `template.py`.
+2. Your function should return 'rock', 'paper', or 'scissors'.
+3. Before submitting your python, rename the file to `team<team_number>.py`.
+    e.g. `team1.py`, `team2.py`, `team3.py`....
+4. On the Compsoc Discord, submit your `template.py` file to the EGM thread in general on the Discord.
