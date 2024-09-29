@@ -24,13 +24,14 @@ def load_algorithms():
     """
     algorithms = []
     for file in os.listdir("submissions"):
-        if file.endswith(".py") and file.startswith("team"):
+        if file.endswith(".py"):
             team_name = file.split(".")[0]
             module = importlib.import_module(f"submissions.{team_name}")
             algorithms.append(module)
+    # Print the names from the RockPaperScissors class instances.
+    print([module.RockPaperScissors().team_name for module in algorithms])
     return algorithms
 
-# Tournament knockout tree
 def play_tournament():
     """
     Tournament knockout tree.
@@ -39,6 +40,12 @@ def play_tournament():
     stage = 1
     while len(algorithms) > 1:
         winners = []
+        if len(algorithms) % 2 == 1:
+            # Give a bye to the last algorithm
+            winners.append(algorithms[-1])
+            algorithms = algorithms[:-1]
+        print([module.RockPaperScissors().team_name for module in algorithms])
+
         for i in range(0, len(algorithms), 2):
             algorithm_1 = algorithms[i].RockPaperScissors()
             algorithm_2 = algorithms[i + 1].RockPaperScissors()
@@ -71,7 +78,7 @@ def play_round(algorithm_1, algorithm_2):
 
         moves_1.append(move_1)
         moves_2.append(move_2)
-
+        print(f"Algorithm 1: {move_1}, Algorithm 2: {move_2}, Score: {score}")
         score += base_game_rules(move_1, move_2)
 
     if score == 0:
@@ -89,6 +96,10 @@ def play_round(algorithm_1, algorithm_2):
 
         score += base_game_rules(move_1, move_2)
         print(f"Score: {score}")
+
+        if tiebreaker_count > 0:
+            print("Tiebreaker limit reached")
+            break
 
     return score
 
@@ -109,3 +120,6 @@ def base_game_rules(move1, move2):
         return 1 if move2 == 'paper' else -1
     return 0
 
+if __name__ == "__main__":
+    winner = play_tournament()
+    print(f"The overall winner is: {winner.team_name}")
