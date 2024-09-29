@@ -1,8 +1,11 @@
 """
 Only this file needs to be submitted. The other files are for reference only.
-BEFORE submitting, you must rename this file to 'team<team_number>.py'.
+BEFORE submitting, you must:
+    - rename this file to 'team<team_number>.py'
+    - make a good team name
+    - test your algorithm actually works by running the tests below
 
-i.e. if you're team num 1, rename this file to 'team1.py'.
+i.e. if your team number is 1, rename this file to 'team1.py'.
 """
 
 
@@ -27,16 +30,27 @@ class RockPaperScissors:
         Best of luck!
         """
 
-
-
         # Example move
         move = 'rock'
         return move
 
 
+"""
+    This is a simple test to check that the algorithm returns a valid moves.
+"""
+if __name__ == "__main__":
+    rps = RockPaperScissors()
+    try:
+        # Test the first move
+        first_move = rps.play([], [])
+        assert first_move in ['rock', 'paper', 'scissors'], "Invalid move returned"
 
+        # Test subsequent moves
+        moves = ['rock', 'paper', 'scissors']
+        for move in moves:
+            next_move = rps.play([move], [move])
+            assert next_move in ['rock', 'paper', 'scissors'], "Invalid move returned"
 
-# Example usage
-# rps = RockPaperScissors()
-# print(rps.play(None))  # First move
-# print(rps.play('scissors'))  # Next move
+        print("All tests passed successfully.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
