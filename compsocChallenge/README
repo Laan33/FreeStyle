@@ -1,0 +1,4 @@
+This is a quick project for a programming challenge hosted at our EGM for Compsoc.
+
+In teams of 2-3, teams are given 20 minutes to come up with the best algorithm to play Rock Paper Scissors aganist the other teams, over 20 rounds. The team with the most wins wins, if a tie, the program will continue until a winner is decided.
+
