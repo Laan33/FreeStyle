@@ -24,7 +24,7 @@ def load_algorithms():
     """
     algorithms = []
     for file in os.listdir("submissions"):
-        if file.endswith(".py"):
+        if file.endswith(".py") and file.startswith("team"):
             team_name = file.split(".")[0]
             module = importlib.import_module(f"submissions.{team_name}")
             algorithms.append(module)
@@ -40,11 +40,22 @@ def play_tournament():
     stage = 1
     while len(algorithms) > 1:
         winners = []
+        losers = []
+
+        # If there is an odd number of algorithms, select a losing algorithm to play against the last algorithm
         if len(algorithms) % 2 == 1:
-            # Give a bye to the last algorithm
-            winners.append(algorithms[-1])
+            last_algorithm = algorithms[-1]
             algorithms = algorithms[:-1]
-        print([module.RockPaperScissors().team_name for module in algorithms])
+            algorithm_1 = last_algorithm.RockPaperScissors()
+            algorithm_2 = algorithms[-1].RockPaperScissors()
+            score = play_round(algorithm_1, algorithm_2)
+            if score > 0:
+                winners.append(last_algorithm)
+                losers.append(algorithms[-1])
+            else:
+                winners.append(algorithms[-1])
+                losers.append(last_algorithm)
+            algorithms = algorithms[:-1]
 
         for i in range(0, len(algorithms), 2):
             algorithm_1 = algorithms[i].RockPaperScissors()
@@ -52,8 +63,10 @@ def play_tournament():
             score = play_round(algorithm_1, algorithm_2)
             if score > 0:
                 winners.append(algorithms[i])
+                losers.append(algorithms[i + 1])
             else:
                 winners.append(algorithms[i + 1])
+                losers.append(algorithms[i])
         algorithms = winners
         print(f"Stage {stage} winners: {[algorithm.__name__ for algorithm in algorithms]}")
         stage += 1
