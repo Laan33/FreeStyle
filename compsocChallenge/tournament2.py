@@ -1,22 +1,24 @@
 import importlib
 import os
+import time
 
 """
     All the algorithms are in the submissions folder.
     The naming format is <team_name>.py
-    
+
     Load all the algorithms from the submissions folder, and create a tournament tree.
     It will be a knockout tournament, where the winner of each round advances to the next round.
-    
-    
+
+
     In the play functions, the algorithm should return 'rock', 'paper', or 'scissors'.
     In each round, we track the moves in two arrays, and provide each to the algorithms.
     Each array has the move of an algorithm.
-    
+
     The algorithm returns it's move for the current game.
-    
+
     In each round, the algorithms play against each other 20 times.
 """
+
 
 def load_algorithms():
     """
@@ -32,6 +34,7 @@ def load_algorithms():
     print([module.RockPaperScissors().team_name for module in algorithms])
     return algorithms
 
+
 def play_tournament():
     """
     Tournament knockout tree.
@@ -45,11 +48,13 @@ def play_tournament():
         for i in range(0, len(algorithms), 2):
             # If there is an odd number of algorithms, select a losing algorithm to play against the last algorithm
             if (len(algorithms) - i) == 1:
-
                 last_algorithm = algorithms[-1]
                 algorithms = algorithms[:-1]
                 algorithm_1 = last_algorithm.RockPaperScissors()
                 algorithm_2 = algorithms[-1].RockPaperScissors()
+
+                print(f"Playing {algorithm_1.team_name} vs {algorithm_2.team_name}")
+
                 score = play_round(algorithm_1, algorithm_2)
                 if score > 0:
                     winners.append(last_algorithm)
@@ -62,6 +67,7 @@ def play_tournament():
             algorithm_1 = algorithms[i].RockPaperScissors()
             algorithm_2 = algorithms[i + 1].RockPaperScissors()
             print(f"Playing {algorithm_1.team_name} vs {algorithm_2.team_name}")
+            time.sleep(0.2)  # 200 millisecond pause
             score = play_round(algorithm_1, algorithm_2)
             if score > 0:
                 winners.append(algorithms[i])
@@ -71,12 +77,11 @@ def play_tournament():
                 losers.append(algorithms[i])
 
         algorithms = winners
-        print(f"Stage {stage} winners: {[algorithm.__name__ for algorithm in algorithms]}")
+        print(f"Stage {stage} winners: {[algorithm.team_name for algorithm in algorithms]}")
+        input("Press Enter to proceed to the next stage...")  # Pause and require input
         stage += 1
 
     return algorithms[0].RockPaperScissors()
-
-
 
 def play_round(algorithm_1, algorithm_2):
     """
@@ -95,6 +100,7 @@ def play_round(algorithm_1, algorithm_2):
         moves_1.append(move_1)
         moves_2.append(move_2)
         print(f"Algorithm 1: {move_1}, Algorithm 2: {move_2}, Score: {score}")
+        time.sleep(0.2)
         score += base_game_rules(move_1, move_2)
 
     if score == 0:
@@ -123,8 +129,10 @@ def play_round(algorithm_1, algorithm_2):
 # Simple function to define rock paper scissors rules
 def base_game_rules(move1, move2):
     # Validate moves
-    if move1 not in ['rock', 'paper', 'scissors'] or move2 not in ['rock', 'paper', 'scissors']:
-        raise ValueError("Invalid move")
+    if move1 not in ['rock', 'paper', 'scissors']:
+        return -1
+    if move2 not in ['rock', 'paper', 'scissors']:
+        return 1
 
     if move1 == move2:
         return 0
@@ -135,6 +143,7 @@ def base_game_rules(move1, move2):
     if move1 == 'scissors':
         return 1 if move2 == 'paper' else -1
     return 0
+
 
 if __name__ == "__main__":
     winner = play_tournament()
